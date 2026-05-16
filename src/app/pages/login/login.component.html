@@ -1,0 +1,59 @@
+<div class="login-container">
+
+  <h1>Login Page</h1>
+
+  <form [formGroup]="loginForm">
+
+    <input
+      type="email"
+      placeholder="Enter Email"
+      formControlName="email"
+    >
+
+    <br><br>
+
+    <div
+     *ngIf="
+      loginForm.controls.email.touched &&
+      loginForm.controls.email.invalid
+     "
+    >
+
+      <small>Email is invalid</small>
+
+    </div>
+
+    <input
+      type="password"
+      placeholder="Enter Password"
+      formControlName="password"
+    >
+
+    <br><br>
+
+    <div
+     *ngIf="
+      loginForm.controls.password.touched &&
+      loginForm.controls.password.invalid
+     "
+    >
+
+      <small>Password Min 4 Characters</small>
+
+    </div>
+
+    <button (click)="login()">
+      Login
+    </button>
+<br><br>
+
+<p>
+ Don't have an account ?
+
+ <a routerLink="/register">
+   Register
+ </a>
+</p>
+  </form>
+
+</div>

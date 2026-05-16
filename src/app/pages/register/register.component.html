@@ -1,0 +1,47 @@
+<div class="register-container">
+
+  <h1>Register Page</h1>
+
+  <form [formGroup]="registerForm">
+
+    <input
+      type="text"
+      placeholder="Enter Name"
+      formControlName="name"
+    >
+
+    <br><br>
+
+    <input
+      type="email"
+      placeholder="Enter Email"
+      formControlName="email"
+    >
+
+    <br><br>
+
+    <input
+      type="password"
+      placeholder="Enter Password"
+      formControlName="password"
+    >
+
+    <br><br>
+
+    <button (click)="register()">
+      Register
+    </button>
+
+  </form>
+
+  <br>
+
+  <p>
+    Already have an account ?
+
+    <a [routerLink]="['/']">
+      Login
+    </a>
+  </p>
+
+</div>

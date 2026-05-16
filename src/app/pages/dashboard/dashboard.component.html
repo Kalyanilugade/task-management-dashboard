@@ -1,0 +1,234 @@
+<div
+ class="dashboard"
+ [class.dark]="darkMode"
+>
+  <div class="top-section">
+
+    <h1>
+      Task Management Dashboard
+    </h1>
+
+    <button
+      class="logout-btn"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+<button
+ class="theme-btn"
+ (click)="toggleDarkMode()"
+>
+
+ {{
+  darkMode
+  ?
+  'Light Mode'
+  :
+  'Dark Mode'
+ }}
+
+</button>
+  </div>
+
+  <!-- 📊 STATS SECTION -->
+  <div class="stats-section">
+
+    <div class="stat-card total-card">
+      <h2>{{getTotalTasks()}}</h2>
+      <p>Total Tasks</p>
+    </div>
+
+    <div class="stat-card completed-card">
+      <h2>{{getCompletedCount()}}</h2>
+      <p>Completed Tasks</p>
+    </div>
+
+    <div class="stat-card pending-card">
+      <h2>{{getPendingCount()}}</h2>
+      <p>Pending Tasks</p>
+    </div>
+
+  </div>
+  
+  <!-- 🧠 SMART FEATURES SECTION -->
+  <div class="smart-section">
+
+    <div class="score-box">
+      <h3>🔥 Productivity Score</h3>
+      <h1>{{ getProductivityScore() }}%</h1>
+    </div>
+
+    <div class="insight">
+      {{ getAverageCompletionTime() }}
+    </div>
+
+  </div>
+
+  <div class="dashboard-content">
+
+    <!-- LEFT SECTION -->
+    <div class="left-section">
+
+      <!-- ADD TASK -->
+      <div class="input-section">
+
+        <input
+          type="text"
+          placeholder="Enter Task"
+          [(ngModel)]="taskName"
+          (input)="getSuggestions()"
+        >
+
+        <button
+          class="add-btn"
+          (click)="editMode ? updateTask() : addTask()"
+        >
+          {{ editMode ? 'Update Task' : 'Add Task' }}
+        </button>
+
+      </div>
+
+      <!-- 🧠 SUGGESTIONS -->
+      <ul *ngIf="suggestedTasks.length" class="suggestion-box">
+        <li
+          *ngFor="let s of suggestedTasks"
+          (click)="taskName = s; suggestedTasks=[]"
+        >
+          {{ s }}
+        </li>
+      </ul>
+
+      <!-- SEARCH -->
+      <div class="search-section">
+
+        <input
+          type="text"
+          placeholder="Search Task"
+          [(ngModel)]="searchText"
+        >
+
+      </div>
+
+      <!-- FILTER -->
+      <div class="filter-section">
+
+        <button (click)="filterType='all'">
+          All
+        </button>
+
+        <button (click)="filterType='completed'">
+          Completed
+        </button>
+
+        <button (click)="filterType='pending'">
+          Pending
+        </button>
+
+      </div>
+
+      <br>
+
+      <!-- TASK LIST -->
+      <div
+        class="task-card"
+        *ngFor="let task of getFilteredTasks()"
+      >
+
+        <div class="task-title">
+
+          {{task.title}} -
+
+          <span class="completed" *ngIf="task.completed">
+            Completed
+          </span>
+
+          <span class="pending" *ngIf="!task.completed">
+            Pending
+          </span>
+
+        </div>
+
+        <div class="task-actions">
+
+          <button
+            class="edit-btn"
+            (click)="editTask(task)"
+          >
+            Edit
+          </button>
+
+          <button
+            class="complete-btn"
+            (click)="toggleTask(task)"
+          >
+            {{ task.completed ? 'Mark Pending' : 'Mark Complete' }}
+          </button>
+
+          <button
+            class="delete-btn"
+            (click)="deleteTask(task.id)"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SECTION -->
+    <div class="right-section">
+
+      <h2>Task Analytics</h2>
+
+      <div class="chart-container">
+        <canvas id="taskChart"></canvas>
+        <br><br>
+
+<canvas id="barChart"></canvas>
+
+<br><br>
+
+<canvas id="lineChart"></canvas>
+      </div>
+
+    </div>
+    <!-- 🤖 AI CHATBOT -->
+<div class="chatbot">
+
+  <div class="chat-header">
+    🤖 AI Assistant
+  </div>
+
+  <div class="chat-body">
+
+    <div *ngFor="let msg of chatMessages"
+         [ngClass]="msg.role">
+
+      {{ msg.text }}
+
+    </div>
+
+  </div>
+
+  <div class="chat-input">
+
+    <input
+      type="text"
+      placeholder="Ask something..."
+      [(ngModel)]="chatInput"
+      (keyup.enter)="sendMessage()"
+    >
+
+    <button (click)="sendMessage()">
+      Send
+    </button>
+
+  </div>
+
+</div>
+<br>
+  </div>
+
+</div>
