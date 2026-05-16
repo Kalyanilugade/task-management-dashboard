@@ -2,74 +2,119 @@
  class="dashboard"
  [class.dark]="darkMode"
 >
+
+  <!-- 🔝 TOP BAR -->
+
   <div class="top-section">
 
     <h1>
       Task Management Dashboard
     </h1>
 
-    <button
-      class="logout-btn"
-      (click)="logout()"
-    >
-      Logout
-    </button>
-<button
- class="theme-btn"
- (click)="toggleDarkMode()"
->
+    <div class="top-buttons">
 
- {{
-  darkMode
-  ?
-  'Light Mode'
-  :
-  'Dark Mode'
- }}
+      <button
+        class="theme-btn"
+        (click)="toggleDarkMode()"
+      >
 
-</button>
+        {{
+          darkMode
+          ?
+          'Light Mode'
+          :
+          'Dark Mode'
+        }}
+
+      </button>
+
+      <button
+        class="logout-btn"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
   </div>
 
-  <!-- 📊 STATS SECTION -->
+  <!-- 📊 STATS -->
+
   <div class="stats-section">
 
     <div class="stat-card total-card">
-      <h2>{{getTotalTasks()}}</h2>
-      <p>Total Tasks</p>
+
+      <h2>
+        {{getTotalTasks()}}
+      </h2>
+
+      <p>
+        Total Tasks
+      </p>
+
     </div>
 
     <div class="stat-card completed-card">
-      <h2>{{getCompletedCount()}}</h2>
-      <p>Completed Tasks</p>
+
+      <h2>
+        {{getCompletedCount()}}
+      </h2>
+
+      <p>
+        Completed
+      </p>
+
     </div>
 
     <div class="stat-card pending-card">
-      <h2>{{getPendingCount()}}</h2>
-      <p>Pending Tasks</p>
+
+      <h2>
+        {{getPendingCount()}}
+      </h2>
+
+      <p>
+        Pending
+      </p>
+
     </div>
 
   </div>
-  
-  <!-- 🧠 SMART FEATURES SECTION -->
+
+  <!-- 🧠 PRODUCTIVITY -->
+
   <div class="smart-section">
 
     <div class="score-box">
-      <h3>🔥 Productivity Score</h3>
-      <h1>{{ getProductivityScore() }}%</h1>
+
+      <h3>
+        Productivity Score
+      </h3>
+
+      <h1>
+        {{getProductivityScore()}}%
+      </h1>
+
     </div>
 
     <div class="insight">
-      {{ getAverageCompletionTime() }}
+
+      {{getAverageCompletionTime()}}
+
     </div>
 
   </div>
 
+  <!-- 🧱 MAIN -->
+
   <div class="dashboard-content">
 
-    <!-- LEFT SECTION -->
+    <!-- LEFT -->
+
     <div class="left-section">
 
-      <!-- ADD TASK -->
+      <!-- ✍️ ADD TASK -->
+
       <div class="input-section">
 
         <input
@@ -83,22 +128,39 @@
           class="add-btn"
           (click)="editMode ? updateTask() : addTask()"
         >
-          {{ editMode ? 'Update Task' : 'Add Task' }}
+
+          {{
+            editMode
+            ?
+            'Update'
+            :
+            'Add Task'
+          }}
+
         </button>
 
       </div>
 
-      <!-- 🧠 SUGGESTIONS -->
-      <ul *ngIf="suggestedTasks.length" class="suggestion-box">
+      <!-- 💡 SUGGESTIONS -->
+
+      <ul
+        *ngIf="suggestedTasks.length"
+        class="suggestion-box"
+      >
+
         <li
           *ngFor="let s of suggestedTasks"
-          (click)="taskName = s; suggestedTasks=[]"
+          (click)="taskName=s; suggestedTasks=[]"
         >
-          {{ s }}
+
+          {{s}}
+
         </li>
+
       </ul>
 
-      <!-- SEARCH -->
+      <!-- 🔍 SEARCH -->
+
       <div class="search-section">
 
         <input
@@ -109,26 +171,32 @@
 
       </div>
 
-      <!-- FILTER -->
+      <!-- 🎛 FILTER -->
+
       <div class="filter-section">
 
-        <button (click)="filterType='all'">
+        <button
+          (click)="filterType='all'"
+        >
           All
         </button>
 
-        <button (click)="filterType='completed'">
+        <button
+          (click)="filterType='completed'"
+        >
           Completed
         </button>
 
-        <button (click)="filterType='pending'">
+        <button
+          (click)="filterType='pending'"
+        >
           Pending
         </button>
 
       </div>
 
-      <br>
+      <!-- 🧾 TASK LIST -->
 
-      <!-- TASK LIST -->
       <div
         class="task-card"
         *ngFor="let task of getFilteredTasks()"
@@ -136,13 +204,21 @@
 
         <div class="task-title">
 
-          {{task.title}} -
+          {{task.title}}
 
-          <span class="completed" *ngIf="task.completed">
+          -
+
+          <span
+            class="completed"
+            *ngIf="task.completed"
+          >
             Completed
           </span>
 
-          <span class="pending" *ngIf="!task.completed">
+          <span
+            class="pending"
+            *ngIf="!task.completed"
+          >
             Pending
           </span>
 
@@ -161,7 +237,15 @@
             class="complete-btn"
             (click)="toggleTask(task)"
           >
-            {{ task.completed ? 'Mark Pending' : 'Mark Complete' }}
+
+            {{
+              task.completed
+              ?
+              'Mark Pending'
+              :
+              'Mark Complete'
+            }}
+
           </button>
 
           <button
@@ -177,58 +261,76 @@
 
     </div>
 
-    <!-- RIGHT SECTION -->
+    <!-- RIGHT -->
+
     <div class="right-section">
 
-      <h2>Task Analytics</h2>
+      <h2>
+        Task Analytics
+      </h2>
 
-      <div class="chart-container">
+      <div class="chart-box">
+
         <canvas id="taskChart"></canvas>
-        <br><br>
 
-<canvas id="barChart"></canvas>
+      </div>
 
-<br><br>
+      <div class="chart-box">
 
-<canvas id="lineChart"></canvas>
+        <canvas id="barChart"></canvas>
+
+      </div>
+
+      <div class="chart-box">
+
+        <canvas id="lineChart"></canvas>
+
       </div>
 
     </div>
-    <!-- 🤖 AI CHATBOT -->
-<div class="chatbot">
 
-  <div class="chat-header">
-    🤖 AI Assistant
   </div>
 
-  <div class="chat-body">
+  <!-- 🤖 AI CHATBOT -->
 
-    <div *ngFor="let msg of chatMessages"
-         [ngClass]="msg.role">
+  <div class="chatbot">
 
-      {{ msg.text }}
+    <div class="chat-header">
+
+      AI Assistant 🤖
 
     </div>
 
-  </div>
+    <div class="chat-body">
 
-  <div class="chat-input">
+      <div
+        *ngFor="let msg of messages"
+        [ngClass]="msg.sender"
+      >
 
-    <input
-      type="text"
-      placeholder="Ask something..."
-      [(ngModel)]="chatInput"
-      (keyup.enter)="sendMessage()"
-    >
+        {{msg.text}}
 
-    <button (click)="sendMessage()">
-      Send
-    </button>
+      </div>
 
-  </div>
+    </div>
 
-</div>
-<br>
+    <div class="chat-input">
+
+      <input
+        type="text"
+        placeholder="Ask something..."
+        [(ngModel)]="chatInput"
+        (keyup.enter)="sendMessage()"
+      >
+
+      <button
+        (click)="sendMessage()"
+      >
+        Send
+      </button>
+
+    </div>
+
   </div>
 
 </div>
