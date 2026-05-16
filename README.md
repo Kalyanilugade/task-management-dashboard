@@ -1,27 +1,324 @@
-# Demo
+# 🚀 Task Management Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+A modern and responsive **Task Management Dashboard** built using **Angular 17** with authentication, task management, charts, drag & drop Kanban board, dark mode, and AI chatbot features.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# 📌 Features
 
-## Code scaffolding
+## 🔐 Authentication
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* User Registration
+* User Login
+* Fake JWT Authentication
+* Route Guards
+* Logout Functionality
+* User-based task storage using LocalStorage
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## ✅ Task Management
 
-## Running unit tests
+* Add Tasks
+* Edit Tasks
+* Delete Tasks
+* Mark Tasks Complete / Pending
+* Search Tasks
+* Filter Tasks
+* Task Suggestions
+* Task Persistence using LocalStorage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## 📊 Dashboard Analytics
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+* Pie Chart
+* Bar Chart
+* Line Chart
+* Productivity Score
+* Task Statistics
+* Task Completion Insights
 
-## Further help
+Built using:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+* Chart.js
+
+---
+
+## 🎯 Drag & Drop Kanban Board
+
+Move tasks between:
+
+* Todo
+* In Progress
+* Completed
+
+Built using:
+
+* Angular CDK Drag & Drop
+
+---
+
+## 🌙 Dark Mode
+
+* Toggle between Light & Dark Theme
+* Theme stored in LocalStorage
+
+---
+
+## 🤖 AI Assistant Chatbot
+
+* Smart chatbot responses
+* Productivity suggestions
+* Task assistance
+* Interactive UI
+
+---
+
+# 🛠️ Technologies Used
+
+| Technology   | Purpose            |
+| ------------ | ------------------ |
+| Angular 17   | Frontend Framework |
+| TypeScript   | Application Logic  |
+| HTML5        | Structure          |
+| CSS3         | Styling            |
+| Chart.js     | Charts & Analytics |
+| Angular CDK  | Drag & Drop        |
+| RxJS         | State Handling     |
+| LocalStorage | Fake Database      |
+
+---
+
+# 📂 Project Structure
+
+```bash
+src/
+ ├── app/
+ │
+ │    ├── pages/
+ │    │
+ │    │    ├── login/
+ │    │    ├── register/
+ │    │    ├── dashboard/
+ │
+ │    ├── services/
+ │    │
+ │    │    ├── auth.service.ts
+ │
+ │    ├── guards/
+ │    │
+ │    │    ├── auth.guard.ts
+ │
+ │    ├── app.routes.ts
+ │
+ ├── assets/
+ │
+ ├── styles.css
+```
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1️⃣ Clone Repository
+
+```bash
+git clone <your-github-repository-url>
+```
+
+---
+
+## 2️⃣ Navigate to Project
+
+```bash
+cd your-project-name
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+## 4️⃣ Install Angular CDK
+
+```bash
+npm install @angular/cdk@17
+```
+
+---
+
+## 5️⃣ Run Application
+
+```bash
+ng serve
+```
+
+---
+
+# 🌐 Application URL
+
+```bash
+http://localhost:4200
+```
+
+---
+
+# 🔑 Authentication
+
+## Demo Credentials
+
+```bash
+Email: admin@gmail.com
+Password: 1234
+```
+
+OR
+
+Register a new account from the Register Page.
+
+---
+
+# 📸 Dashboard Modules
+
+## ✅ Authentication Pages
+
+* Login Page
+* Register Page
+
+---
+
+## ✅ Dashboard
+
+* Responsive Layout
+* Statistics Cards
+* Productivity Tracking
+
+---
+
+## ✅ Task Features
+
+* Add/Edit/Delete Tasks
+* Search & Filters
+* Task Completion Status
+
+---
+
+## ✅ Analytics
+
+* Pie Chart
+* Bar Graph
+* Line Graph
+
+---
+
+## ✅ Kanban Board
+
+* Todo Tasks
+* In Progress Tasks
+* Completed Tasks
+* Drag & Drop Functionality
+
+---
+
+## ✅ Smart Features
+
+* AI Chatbot
+* Suggestions
+* Productivity Insights
+
+---
+
+# 🌙 Dark Mode
+
+Supports:
+
+* Light Theme
+* Dark Theme
+
+Preference stored using:
+
+* LocalStorage
+
+---
+
+# 💾 Data Storage
+
+Currently using:
+
+* Browser LocalStorage
+
+Stored Data:
+
+* Users
+* JWT Token
+* Tasks
+* Theme
+
+---
+
+# 🚀 Future Enhancements
+
+* ASP.NET Core Web API Integration
+* SQL Server Database
+* Real JWT Authentication
+* Role-Based Authentication
+* Notifications
+* Real AI Chatbot API
+* Calendar Scheduling
+* Team Collaboration
+* Task Priority Levels
+* Due Dates & Reminders
+* File Upload Support
+
+---
+
+# 🧠 Learning Outcomes
+
+This project demonstrates:
+
+* Angular Standalone Components
+* Angular Routing
+* Reactive Forms
+* Authentication Flow
+* LocalStorage Handling
+* Chart.js Integration
+* Angular CDK Drag & Drop
+* State Management Concepts
+* Dashboard UI Design
+
+---
+
+# 👨‍💻 Developed By
+
+Full Stack .NET Developer
+
+### Skills
+
+* Angular
+* ASP.NET Core
+* C#
+* SQL Server
+* REST APIs
+* TypeScript
+
+---
+
+# ⭐ GitHub
+
+If you like this project:
+
+⭐ Star the repository
+🍴 Fork the repository
+🛠️ Contribute to the project
+
+---
+
+# 📃 License
+
+This project is developed for learning and portfolio purposes.
