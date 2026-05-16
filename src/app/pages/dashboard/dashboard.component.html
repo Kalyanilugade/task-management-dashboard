@@ -3,7 +3,7 @@
  [class.dark]="darkMode"
 >
 
-  <!-- 🔝 TOP BAR -->
+  <!-- TOP SECTION -->
 
   <div class="top-section">
 
@@ -11,7 +11,7 @@
       Task Management Dashboard
     </h1>
 
-    <div class="top-buttons">
+    <div>
 
       <button
         class="theme-btn"
@@ -39,49 +39,37 @@
 
   </div>
 
-  <!-- 📊 STATS -->
+  <!-- STATS -->
 
   <div class="stats-section">
 
     <div class="stat-card total-card">
 
-      <h2>
-        {{getTotalTasks()}}
-      </h2>
+      <h2>{{getTotalTasks()}}</h2>
 
-      <p>
-        Total Tasks
-      </p>
+      <p>Total Tasks</p>
 
     </div>
 
     <div class="stat-card completed-card">
 
-      <h2>
-        {{getCompletedCount()}}
-      </h2>
+      <h2>{{getCompletedCount()}}</h2>
 
-      <p>
-        Completed
-      </p>
+      <p>Completed</p>
 
     </div>
 
     <div class="stat-card pending-card">
 
-      <h2>
-        {{getPendingCount()}}
-      </h2>
+      <h2>{{getPendingCount()}}</h2>
 
-      <p>
-        Pending
-      </p>
+      <p>Pending</p>
 
     </div>
 
   </div>
 
-  <!-- 🧠 PRODUCTIVITY -->
+  <!-- PRODUCTIVITY -->
 
   <div class="smart-section">
 
@@ -105,15 +93,15 @@
 
   </div>
 
-  <!-- 🧱 MAIN -->
+  <!-- MAIN CONTENT -->
 
   <div class="dashboard-content">
 
-    <!-- LEFT -->
+    <!-- LEFT SECTION -->
 
     <div class="left-section">
 
-      <!-- ✍️ ADD TASK -->
+      <!-- ADD TASK -->
 
       <div class="input-section">
 
@@ -126,13 +114,19 @@
 
         <button
           class="add-btn"
-          (click)="editMode ? updateTask() : addTask()"
+          (click)="
+            editMode
+            ?
+            updateTask()
+            :
+            addTask()
+          "
         >
 
           {{
             editMode
             ?
-            'Update'
+            'Update Task'
             :
             'Add Task'
           }}
@@ -141,7 +135,7 @@
 
       </div>
 
-      <!-- 💡 SUGGESTIONS -->
+      <!-- SUGGESTIONS -->
 
       <ul
         *ngIf="suggestedTasks.length"
@@ -150,7 +144,10 @@
 
         <li
           *ngFor="let s of suggestedTasks"
-          (click)="taskName=s; suggestedTasks=[]"
+          (click)="
+            taskName=s;
+            suggestedTasks=[]
+          "
         >
 
           {{s}}
@@ -159,7 +156,7 @@
 
       </ul>
 
-      <!-- 🔍 SEARCH -->
+      <!-- SEARCH -->
 
       <div class="search-section">
 
@@ -171,7 +168,7 @@
 
       </div>
 
-      <!-- 🎛 FILTER -->
+      <!-- FILTER -->
 
       <div class="filter-section">
 
@@ -195,7 +192,7 @@
 
       </div>
 
-      <!-- 🧾 TASK LIST -->
+      <!-- TASK LIST -->
 
       <div
         class="task-card"
@@ -259,9 +256,99 @@
 
       </div>
 
+      <!-- KANBAN BOARD -->
+
+      <div class="kanban-board">
+
+        <!-- TODO -->
+
+        <div
+          class="board-column"
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="todoTasks"
+          [cdkDropListConnectedTo]="[
+            progressList,
+            completedList
+          ]"
+          (cdkDropListDropped)="drop($event)"
+        >
+
+          <h2>Todo</h2>
+
+          <div
+            class="drag-task"
+            *ngFor="let task of todoTasks"
+            cdkDrag
+          >
+
+            {{task.title}}
+
+          </div>
+
+        </div>
+
+        <!-- PROGRESS -->
+
+        <div
+          class="board-column"
+          cdkDropList
+          #progressList="cdkDropList"
+          [cdkDropListData]="progressTasks"
+          [cdkDropListConnectedTo]="[
+            todoList,
+            completedList
+          ]"
+          (cdkDropListDropped)="drop($event)"
+        >
+
+          <h2>In Progress</h2>
+
+          <div
+            class="drag-task"
+            *ngFor="let task of progressTasks"
+            cdkDrag
+          >
+
+            {{task.title}}
+
+          </div>
+
+        </div>
+
+        <!-- COMPLETED -->
+
+        <div
+          class="board-column"
+          cdkDropList
+          #completedList="cdkDropList"
+          [cdkDropListData]="completedTasks"
+          [cdkDropListConnectedTo]="[
+            todoList,
+            progressList
+          ]"
+          (cdkDropListDropped)="drop($event)"
+        >
+
+          <h2>Completed</h2>
+
+          <div
+            class="drag-task"
+            *ngFor="let task of completedTasks"
+            cdkDrag
+          >
+
+            {{task.title}}
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT SECTION -->
 
     <div class="right-section">
 
@@ -287,47 +374,47 @@
 
       </div>
 
-    </div>
+      <!-- CHATBOT -->
 
-  </div>
+      <div class="chatbot">
 
-  <!-- 🤖 AI CHATBOT -->
+        <div class="chat-header">
 
-  <div class="chatbot">
+          AI Assistant
 
-    <div class="chat-header">
+        </div>
 
-      AI Assistant 🤖
+        <div class="chat-body">
 
-    </div>
+          <div
+            *ngFor="let msg of chatMessages"
+            [ngClass]="msg.role"
+          >
 
-    <div class="chat-body">
+            {{msg.text}}
 
-      <div
-        *ngFor="let msg of messages"
-        [ngClass]="msg.sender"
-      >
+          </div>
 
-        {{msg.text}}
+        </div>
+
+        <div class="chat-input">
+
+          <input
+            type="text"
+            placeholder="Ask something..."
+            [(ngModel)]="chatInput"
+            (keyup.enter)="sendMessage()"
+          >
+
+          <button
+            (click)="sendMessage()"
+          >
+            Send
+          </button>
+
+        </div>
 
       </div>
-
-    </div>
-
-    <div class="chat-input">
-
-      <input
-        type="text"
-        placeholder="Ask something..."
-        [(ngModel)]="chatInput"
-        (keyup.enter)="sendMessage()"
-      >
-
-      <button
-        (click)="sendMessage()"
-      >
-        Send
-      </button>
 
     </div>
 
